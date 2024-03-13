@@ -4,6 +4,7 @@
 
 module Data.Vector.Transform.T4 where
 
+import Data.Semigroup
 import Data.Monoid
 
 import Data.Vector.Class
@@ -26,7 +27,9 @@ data Transform4 =
 
 instance Monoid Transform4 where
   mempty = Transform4  1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 1 0
-  mappend a b =
+
+instance Semigroup Transform4 where
+  a <> b =
     Transform4
     {
       t4_XX = t4_XX a * t4_XX b  +  t4_XY a * t4_YX b  +  t4_XZ a * t4_ZX b  +  t4_XW a * t4_WX b,

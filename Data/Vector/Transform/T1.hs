@@ -4,6 +4,7 @@
 
 module Data.Vector.Transform.T1 where
 
+import Data.Semigroup
 import Data.Monoid
 
 import Data.Vector.Class
@@ -23,7 +24,9 @@ data Transform1 =
 
 instance Monoid Transform1 where
   mempty = Transform1  1 0
-  mappend a b =
+
+instance Semigroup Transform1 where
+  a <> b =
     Transform1
     {
       t1_XX = t1_XX a * t1_XX b,
